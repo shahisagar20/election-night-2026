@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Election Night 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="US midterm election results for the Senate, House and governors, November 3, 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap">
+<style>
+/* Layout: newsroom results desk. Sticky masthead, headline + three chamber tallies, then map desk, count, call log, full tables. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --ink: #121a2b; --muted: #5a6274; --line: #dfe3ea; --chip: #eef0f4;
+  --dem: #1f5ad6; --rep: #cf2f2b; --dem-soft: #a9c0f2; --rep-soft: #f1b3b0; --dem-ink: #ffffff; --rep-ink: #ffffff;
+  --ind: #7a4fc9; --ind-soft: #d3c3f0; --none: #eceef2; --wait-line: #9aa1af; --warn: #c88a00; --focus: #1f5ad6;
+  --f-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r: 10px; --gap: clamp(16px, 2.4vw, 28px);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e1320; --surface: #161c2b; --ink: #e9edf5; --muted: #9aa3b5; --line: #2a3246; --chip: #212839;
+  --dem: #4d82f5; --rep: #ef5550; --dem-soft: #2b4479; --rep-soft: #6e2d2d; --ind: #a07ef0; --ind-soft: #45346e; --none: #1d2333; --wait-line: #6b7387; --warn: #e3a92a; --focus: #7da5ff;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e1320; --surface: #161c2b; --ink: #e9edf5; --muted: #9aa3b5; --line: #2a3246; --chip: #212839;
+  --dem: #4d82f5; --rep: #ef5550; --dem-soft: #2b4479; --rep-soft: #6e2d2d; --ind: #a07ef0; --ind-soft: #45346e; --none: #1d2333; --wait-line: #6b7387; --warn: #e3a92a; --focus: #7da5ff;
+  color-scheme: dark; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--surface); }
+.gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1180px; margin-inline: auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Masthead */
+.mast { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
+.mast .wrap { display: flex; align-items: center; gap: 12px 20px; flex-wrap: wrap; padding-block: 12px; }
+.brand { font-family: var(--f-display); font-weight: 700; font-size: 1.2rem; letter-spacing: -.01em; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand .stripes { display: inline-grid; grid-template-columns: 8px 8px; gap: 2px; }
+.brand .stripes i { width: 8px; height: 18px; border-radius: 2px; background: var(--dem); }
+.brand .stripes i + i { background: var(--rep); }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--chip); }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 0 0 var(--warn); }
+@media (prefers-reduced-motion: no-preference) { .status::before { animation: pulse 2s ease-out infinite; } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--warn) 60%, transparent); } 100% { box-shadow: 0 0 0 8px transparent; } }
+.nav { margin-left: auto; display: flex; gap: 4px; flex-wrap: wrap; }
+.nav a { font-size: .85rem; font-weight: 600; text-decoration: none; padding: 6px 10px; border-radius: 6px; color: var(--muted); }
+.nav a:hover { background: var(--chip); color: var(--ink); }
+@media (max-width: 720px) { .nav { display: none; } }
+
+/* Hero */
+.hero .wrap { display: grid; gap: 14px; padding-block: clamp(28px, 5vw, 56px) 8px; }
+.kicker { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.hero h1 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(2rem, 5.2vw, 3.6rem); line-height: 1.04; letter-spacing: -.02em; text-wrap: balance; max-width: 22ch; }
+.hero h1 .d { color: var(--dem); }
+.dek { margin: 0; font-size: clamp(1rem, 1.6vw, 1.15rem); color: var(--muted); max-width: 64ch; text-wrap: pretty; }
+
+section.block .wrap { display: grid; gap: var(--gap); padding-block: clamp(24px, 4vw, 44px); }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; border-top: 3px solid var(--ink); padding-top: 12px; }
+.sec-head h2 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 1.9rem); letter-spacing: -.01em; }
+.sec-head p { margin: 0; font-size: .875rem; color: var(--muted); max-width: 60ch; }
+
+.grid3 { display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: clamp(16px, 2vw, 22px); display: grid; gap: 14px; align-content: start; min-width: 0; }
+.card h3 { margin: 0; font-size: 1.05rem; font-weight: 700; }
+.note { margin: 0; font-size: .82rem; color: var(--muted); line-height: 1.45; }
+
+/* Tally */
+.tally-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.tally-top .lab { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.big { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 8px; }
+.big .n { font-family: var(--f-display); font-weight: 700; font-size: clamp(2.4rem, 5vw, 3.2rem); line-height: .95; }
+.big .n small { display: block; font-family: var(--f-body); font-size: .75rem; font-weight: 600; color: var(--muted); margin-top: 6px; }
+.big .dn { color: var(--dem); } .big .rn { color: var(--rep); text-align: right; }
+.big .un { text-align: center; font-family: var(--f-body); font-size: .85rem; color: var(--muted); padding-bottom: 4px; }
+.big .un b { display: block; font-size: 1.3rem; color: var(--ink); }
+.tbar { position: relative; padding-top: 22px; }
+.tbar .track { display: flex; height: 18px; border-radius: 4px; overflow: hidden; background: var(--none); }
+.tbar .track i { display: block; height: 100%; }
+.tbar .mk { position: absolute; top: 0; bottom: -4px; border-left: 2px dashed var(--ink); }
+.tbar .mk span { position: absolute; top: -2px; right: 6px; font-size: .72rem; color: var(--muted); white-space: nowrap; }
+.callout { display: flex; gap: 10px; align-items: flex-start; font-size: .85rem; padding: 10px 12px; border-radius: 8px; background: color-mix(in srgb, var(--dem) 10%, var(--surface)); border: 1px solid color-mix(in srgb, var(--dem) 35%, var(--line)); }
+.callout b { color: var(--dem); }
+
+/* Map desk */
+.mapdesk { display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 900px) { .mapdesk { grid-template-columns: 1fr; } }
+.tabs { display: inline-flex; padding: 3px; border-radius: 8px; background: var(--chip); gap: 2px; }
+.tabs button { font: inherit; font-size: .85rem; font-weight: 600; border: 0; background: transparent; color: var(--muted); padding: 6px 14px; border-radius: 6px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+.map { position: relative; }
+.map svg { display: block; width: 100%; height: auto; }
+.map rect { transition: opacity .15s; }
+.map g.st:hover rect, .map g.st.on rect { opacity: .82; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+.tip { position: absolute; z-index: 5; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.18); padding: 10px 12px; font-size: .8rem; line-height: 1.45; width: max-content; max-width: 240px; }
+.tip .t { font-weight: 700; margin-bottom: 4px; }
+.tip .c { display: flex; align-items: center; gap: 6px; }
+.tip .c i { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+.tip .c b { margin-left: auto; padding-left: 10px; }
+.tip .m { color: var(--muted); margin-top: 4px; }
+
+.watch { display: grid; gap: 12px; }
+.wrow { display: grid; gap: 6px; }
+.wrow .h { display: flex; justify-content: space-between; gap: 8px; font-size: .85rem; }
+.wrow .h b { font-weight: 700; }
+.wrow .h span { color: var(--muted); font-size: .78rem; white-space: nowrap; }
+.mini { position: relative; display: flex; height: 22px; border-radius: 4px; overflow: hidden; background: var(--none); font-size: .72rem; font-weight: 700; }
+.mini i { display: flex; align-items: center; font-style: normal; white-space: nowrap; overflow: hidden; }
+.mini .d { background: var(--dem); color: var(--dem-ink); padding-left: 6px; }
+.mini .r { background: var(--rep); color: var(--rep-ink); padding-right: 6px; margin-left: auto; justify-content: flex-end; }
+.mini.soft .d { background: var(--dem-soft); color: var(--ink); }
+.mini.soft .r { background: var(--rep-soft); color: var(--ink); }
+.mini .half { position: absolute; left: 50%; top: 0; bottom: 0; border-left: 2px solid var(--surface); }
+.mini.empty { font-weight: 500; color: var(--muted); align-items: center; padding-left: 8px; }
+
+/* Count chart */
+.count { display: grid; gap: 10px; }
+.crow { display: grid; grid-template-columns: minmax(7rem, 11rem) minmax(0, 1fr) 5.5rem; gap: 12px; align-items: center; font-size: .85rem; }
+.crow .nm b { display: block; font-weight: 700; }
+.crow .nm small { color: var(--muted); }
+.crow .st { justify-self: end; }
+@media (max-width: 560px) { .crow { grid-template-columns: 1fr; gap: 4px; } .crow .st { justify-self: start; } }
+
+.chip { display: inline-block; font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; border: 1px solid var(--line); color: var(--muted); }
+.chip.pd { background: var(--dem); border-color: var(--dem); color: var(--dem-ink); }
+.chip.pr { background: var(--rep); border-color: var(--rep); color: var(--rep-ink); }
+.chip.ld { color: var(--dem); border-color: var(--dem); }
+.chip.lr { color: var(--rep); border-color: var(--rep); }
+.chip.pi { background: var(--ind); border-color: var(--ind); color: #fff; }
+.chip.li { color: var(--ind); border-color: var(--ind); }
+.chip.fl { background: var(--ink); color: var(--bg); border-color: var(--ink); margin-left: 4px; }
+
+/* Call log */
+.log { list-style: none; margin: 0; padding: 0; display: grid; }
+.log li { display: grid; grid-template-columns: 5.6rem 14px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); align-items: start; }
+.log time { font-size: .8rem; font-weight: 700; color: var(--muted); padding-top: 2px; }
+.log .dot { width: 12px; height: 12px; border-radius: 50%; margin-top: 5px; }
+.log .what { font-size: .92rem; }
+.log .what small { display: block; color: var(--muted); font-size: .8rem; }
+.log li.big-call .what { font-weight: 700; }
+
+/* Tables */
+.tools { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.tools input { font: inherit; font-size: .9rem; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); min-width: 0; width: min(100%, 280px); }
+.tbox { overflow: auto; max-height: 34rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+th { position: sticky; top: 0; background: var(--surface); text-align: left; font-size: .74rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); padding: 10px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+td.n, th.n { text-align: right; }
+td.dc { color: var(--dem); } td.rc { color: var(--rep); } td.win { font-weight: 700; }
+tr:last-child td { border-bottom: 0; }
+@media (max-width: 640px) { .opt { display: none; } }
+
+footer .wrap { padding-block: 28px 48px; display: grid; gap: 10px; font-size: .82rem; color: var(--muted); border-top: 1px solid var(--line); }
+footer p { margin: 0; max-width: 90ch; }
+</style>
+
+<header class="mast gut">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="stripes" aria-hidden="true"><i></i><i></i></span>Election Night 2026</a>
+    <span class="status" id="status">Results coming in</span>
+    <nav class="nav" aria-label="Sections">
+      <a href="#balance">Balance</a><a href="#map">Map</a><a href="#count">Vote count</a><a href="#calls">Race calls</a><a href="#races">All races</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero gut">
+    <div class="wrap">
+      <div class="kicker">US midterm elections · Tuesday, November 3, 2026</div>
+      <h1><span class="d" id="h-lead"></span> <span id="h-rest"></span></h1>
+      <p class="dek" id="dek"></p>
+    </div>
+  </section>
+
+  <section class="block gut" id="balance">
+    <div class="wrap">
+      <div class="sec-head"><h2>Balance of power</h2><p id="tally-time"></p></div>
+      <div class="grid3" id="tallies"></div>
+    </div>
+  </section>
+
+  <section class="block gut" id="map">
+    <div class="wrap">
+      <div class="sec-head"><h2>Results map</h2>
+        <div class="tabs" role="tablist" aria-label="Choose map">
+          <button role="tab" id="tab-senate" aria-selected="true" data-kind="senate">Senate</button>
+          <button role="tab" id="tab-governor" aria-selected="false" data-kind="governor">Governor</button>
+        </div>
+      </div>
+      <div class="mapdesk">
+        <div class="card">
+          <div class="legend" aria-label="Legend">
+            <span><i style="background:var(--dem)"></i>Democrat projected</span>
+            <span><i style="background:var(--dem-soft)"></i>Democrat leads</span>
+            <span><i style="background:var(--rep)"></i>Republican projected</span>
+            <span><i style="background:var(--rep-soft)"></i>Republican leads</span>
+            <span><i style="background:var(--ind)"></i>Independent</span>
+            <span><i style="border:1.5px dashed var(--wait-line)"></i>No call yet</span>
+            <span><i style="border:3px solid var(--ink)"></i>Changed party</span>
+            <span><i style="background:var(--none)"></i>No race</span>
+          </div>
+          <div class="map" id="mapbox"></div>
+          <p class="note">Each square is a state. Hover or tap a square for the candidates and the count.</p>
+        </div>
+        <div class="card">
+          <h3>Senate races to watch</h3>
+          <p class="note">The contests most likely to decide Senate control. Lighter bars are still being counted.</p>
+          <div class="watch" id="watch"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block gut" id="count">
+    <div class="wrap">
+      <div class="sec-head"><h2>Senate vote count</h2><p>Every race with at least 5% of the expected vote counted, widest Democratic margin at the top. The white line marks 50%.</p></div>
+      <div class="card"><div class="count" id="countchart"></div></div>
+    </div>
+  </section>
+
+  <section class="block gut" id="calls">
+    <div class="wrap">
+      <div class="sec-head"><h2>Race calls</h2><p>Projections in the order they were reported, Eastern Time.</p></div>
+      <div class="card"><ol class="log" id="log"></ol></div>
+    </div>
+  </section>
+
+  <section class="block gut" id="races">
+    <div class="wrap">
+      <div class="sec-head"><h2>All races</h2>
+        <div class="tabs" role="tablist" aria-label="Choose table">
+          <button role="tab" id="ttab-senate" aria-selected="true" data-kind="senate">Senate</button>
+          <button role="tab" id="ttab-governor" aria-selected="false" data-kind="governor">Governor</button>
+          <button role="tab" id="ttab-house" aria-selected="false" data-kind="house">House flips</button>
+        </div>
+      </div>
+      <div class="tools"><label class="note" for="q">Find a state or candidate</label><input id="q" type="search" placeholder="e.g. Texas or Collins" autocomplete="off"></div>
+      <div class="tbox"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+  <section class="block gut" id="updates">
+    <div class="wrap">
+      <div class="sec-head"><h2>How this page updates</h2><p>Claude re-reads live results pages on a schedule, checks the numbers and republishes this page. Recent updates:</p></div>
+      <div class="card">
+        <ol class="log" id="ulog"></ol>
+        <p class="note">Every update is checked before it goes live. A race is skipped if its vote shares add up to more than 100%, if the share counted goes backwards, or if a projected race would change hands; seat counts are never allowed to fall. If too much of an update fails these checks, none of it is published.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="gut">
+  <div class="wrap">
+    <p><b>About these numbers.</b> Results are read from ABC News live results pages, which use Associated Press vote data, and updated by Claude every few minutes on election night. They can lag the source by a few minutes, and outlets call races at different speeds. Early counts can shift a lot as mail ballots and late-reporting counties come in. The House control projection is from Decision Desk HQ, made at 9:09 PM ET.</p>
+    <p>Senate tallies include the 65 senators not on this year's ballot. Democrats need 51 seats for Senate control because Vice President JD Vance breaks a 50–50 tie. House control takes 218 of 435 seats.</p>
+  </div>
+</footer>
+
+<script type="application/json" id="election-data">{"meta":{"updated_label":"10:18 PM ET, Nov 3","updated_iso":"2026-11-04T03:18:00Z","headline_lead":"Democrats","headline_rest":"projected to win the House as the Senate stays in play","dek":"Decision Desk HQ projects Democrats will take the House. In the Senate, Roy Cooper flipped North Carolina and Democrats lead in Republican-held Texas, Kansas, Iowa, South Carolina and Ohio, while Maine is neck and neck."},"tally":[{"chamber":"Senate","dem":45,"rep":37,"uncalled":20,"majority":51,"total":100,"dem_before":47,"rep_before":53,"as_of":"10:18 PM ET, Nov 3","source":"ABC News live results (AP data)"},{"chamber":"House","dem":150,"rep":156,"uncalled":326,"majority":218,"total":435,"dem_before":214,"rep_before":218,"as_of":"10:18 PM ET, Nov 3","source":"ABC News live results (AP data)"}],"senate":[{"abbr":"AL","state":"Alabama","held_by":"R","dem_candidate":"Everett Wess","rep_candidate":"Barry Moore","dem_pct":41,"rep_pct":59,"pct_in":51,"status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":null},{"abbr":"AK","state":"Alaska","held_by":"R","dem_candidate":"Mary Peltola","rep_candidate":"Dan Sullivan","dem_pct":null,"rep_pct":null,"pct_in":0,"status":"Awaiting results","winner":null,"flip":false,"as_of":"Polls close 1 AM ET","challenger_party":"D","other_pct":null},{"abbr":"AR","state":"Arkansas","held_by":"R","dem_candidate":"Hallie Shoffner","rep_candidate":"Tom Cotton","dem_pct":44,"rep_pct":53,"pct_in":74,"status":"Projected R","winner":"Tom Cotton","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":3},{"abbr":"CO","state":"Colorado","held_by":"D","dem_candidate":"John Hickenlooper","rep_candidate":"Mark Baisley","dem_pct":61,"rep_pct":35,"pct_in":73,"status":"Projected D","winner":"John Hickenlooper","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":3},{"abbr":"DE","state":"Delaware","held_by":"D","dem_candidate":"Chris Coons","rep_candidate":"Michael Katz","dem_pct":64,"rep_pct":36,"pct_in":92,"status":"Projected D","winner":"Chris Coons","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":null},{"abbr":"FL","state":"Florida (special)","held_by":"R","dem_candidate":"Angie Nixon","rep_candidate":"Ashley Moody","dem_pct":48,"rep_pct":51,"pct_in":99,"status":"Projected R","winner":"Ashley Moody","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":1},{"abbr":"GA","state":"Georgia","held_by":"D","dem_candidate":"Jon Ossoff","rep_candidate":"Mike Collins","dem_pct":59,"rep_pct":41,"pct_in":83,"status":"Projected D","winner":"Jon Ossoff","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":0},{"abbr":"ID","state":"Idaho","held_by":"R","dem_candidate":"Todd Achilles (I)","rep_candidate":"Jim Risch","dem_pct":null,"rep_pct":null,"pct_in":0,"status":"Awaiting results","winner":null,"flip":false,"as_of":"Polls close 11 PM ET","challenger_party":"I","other_pct":null},{"abbr":"IL","state":"Illinois","held_by":"D","dem_candidate":"Juliana Stratton","rep_candidate":"Don Tracy","dem_pct":62,"rep_pct":37,"pct_in":55,"status":"Projected D","winner":"Juliana Stratton","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":1},{"abbr":"IA","state":"Iowa","held_by":"R","dem_candidate":"Josh Turek","rep_candidate":"Ashley Hinson","dem_pct":54,"rep_pct":43,"pct_in":37,"status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":3},{"abbr":"KS","state":"Kansas","held_by":"R","dem_candidate":"Adam Hamilton","rep_candidate":"Roger Marshall","dem_pct":55,"rep_pct":42,"pct_in":70,"status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":3},{"abbr":"KY","state":"Kentucky","held_by":"R","dem_candidate":"Charles Booker","rep_candidate":"Andy Barr","dem_pct":43,"rep_pct":55,"pct_in":97,"status":"Projected R","winner":"Andy Barr","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":2},{"abbr":"LA","state":"Louisiana","held_by":"R","dem_candidate":"Jamie Davis","rep_candidate":"Julia Letlow","dem_pct":44,"rep_pct":56,"pct_in":54,"status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":null},{"abbr":"ME","state":"Maine","held_by":"R","dem_candidate":"Troy Jackson","rep_candidate":"Susan Collins","dem_pct":49.7,"rep_pct":50.2,"pct_in":19,"status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":0},{"abbr":"MA","state":"Massachusetts","held_by":"D","dem_candidate":"Ed Markey","rep_candidate":"John Deaton","dem_pct":67,"rep_pct":28,"pct_in":21,"status":"Projected D","winner":"Ed Markey","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":3},{"abbr":"MI","state":"Michigan","held_by":"D","dem_candidate":"Abdul El-Sayed","rep_candidate":"Mike Rogers","dem_pct":54,"rep_pct":44,"pct_in":22,"status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":1},{"abbr":"MN","state":"Minnesota","held_by":"D","dem_candidate":"Peggy Flanagan","rep_candidate":"Michele Tafoya","dem_pct":41,"rep_pct":56,"pct_in":5,"status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":2},{"abbr":"MS","state":"Mississippi","held_by":"R","dem_candidate":"Scott Colom","rep_candidate":"Cindy Hyde-Smith","dem_pct":47,"rep_pct":51,"pct_in":65,"status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":2},{"abbr":"MT","state":"Montana","held_by":"R","dem_candidate":"Alani Bankhead","rep_candidate":"Kurt Alme","dem_pct":11,"rep_pct":51,"pct_in":4,"status":"Too early","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":36},{"abbr":"NE","state":"Nebraska","held_by":"R","dem_candidate":"Chuck Conboy (I)","rep_candidate":"Pete Ricketts","dem_pct":null,"rep_pct":42,"pct_in":37,"status":"I leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"I","other_pct":53},{"abbr":"NH","state":"New Hampshire","held_by":"D","dem_candidate":"Chris Pappas","rep_candidate":"John E. Sununu","dem_pct":57,"rep_pct":41,"pct_in":57,"status":"Projected D","winner":"Chris Pappas","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":2},{"abbr":"NJ","state":"New Jersey","held_by":"D","dem_candidate":"Cory Booker","rep_candidate":"Justin Murphy","dem_pct":63,"rep_pct":34,"pct_in":78,"status":"Projected D","winner":"Cory Booker","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":2},{"abbr":"NM","state":"New Mexico","held_by":"D","dem_candidate":"Ben Ray Luján","rep_candidate":"Larry Marker","dem_pct":62,"rep_pct":38,"pct_in":29,"status":"Projected D","winner":"Ben Ray Luján","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":null},{"abbr":"NC","state":"North Carolina","held_by":"R","dem_candidate":"Roy Cooper","rep_candidate":"Michael Whatley","dem_pct":58,"rep_pct":40,"pct_in":96,"status":"Projected D","winner":"Roy Cooper","flip":true,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":1},{"abbr":"OH","state":"Ohio (special)","held_by":"R","dem_candidate":"Sherrod Brown","rep_candidate":"Jon Husted","dem_pct":48,"rep_pct":47.2,"pct_in":75,"status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":3},{"abbr":"OK","state":"Oklahoma","held_by":"R","dem_candidate":"N'Kiyla Thomas","rep_candidate":"Kevin Hern","dem_pct":38,"rep_pct":59,"pct_in":73,"status":"Projected R","winner":"Kevin Hern","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":1},{"abbr":"OR","state":"Oregon","held_by":"D","dem_candidate":"Jeff Merkley","rep_candidate":"David Smith","dem_pct":null,"rep_pct":null,"pct_in":0,"status":"Awaiting results","winner":null,"flip":false,"as_of":"Polls close 11 PM ET","challenger_party":"D","other_pct":null},{"abbr":"RI","state":"Rhode Island","held_by":"D","dem_candidate":"Jack Reed","rep_candidate":"Raymond McKay","dem_pct":67,"rep_pct":29,"pct_in":95,"status":"Projected D","winner":"Jack Reed","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":4},{"abbr":"SC","state":"South Carolina","held_by":"R","dem_candidate":"Annie Andrews","rep_candidate":"Lindsey Graham","dem_pct":51,"rep_pct":47,"pct_in":87,"status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":1},{"abbr":"SD","state":"South Dakota","held_by":"R","dem_candidate":"Brian Bengs (I)","rep_candidate":"Mike Rounds","dem_pct":null,"rep_pct":64,"pct_in":19,"status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"I","other_pct":36},{"abbr":"TN","state":"Tennessee","held_by":"R","dem_candidate":"Marquita Bradshaw","rep_candidate":"Bill Hagerty","dem_pct":43,"rep_pct":55,"pct_in":74,"status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":0},{"abbr":"TX","state":"Texas","held_by":"R","dem_candidate":"James Talarico","rep_candidate":"Ken Paxton","dem_pct":58,"rep_pct":40,"pct_in":57,"status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":2},{"abbr":"VA","state":"Virginia","held_by":"D","dem_candidate":"Mark Warner","rep_candidate":"Bert Mizusawa","dem_pct":59,"rep_pct":40,"pct_in":82,"status":"Projected D","winner":"Mark Warner","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":0},{"abbr":"WV","state":"West Virginia","held_by":"R","dem_candidate":"Rachel Anderson","rep_candidate":"Shelley Moore Capito","dem_pct":38,"rep_pct":58,"pct_in":89,"status":"Projected R","winner":"Shelley Moore Capito","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":4},{"abbr":"WY","state":"Wyoming","held_by":"R","dem_candidate":"James Byrd","rep_candidate":"Harriet Hageman","dem_pct":45,"rep_pct":55,"pct_in":9,"status":"Projected R","winner":"Harriet Hageman","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","other_pct":null}],"governor":[{"abbr":"AL","state":"Alabama","held_by":"R","dem_candidate":"Doug Jones","rep_candidate":"Tommy Tuberville","status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":44,"rep_pct":56,"other_pct":null,"pct_in":49},{"abbr":"AK","state":"Alaska","held_by":"R","dem_candidate":"Jonathan Kreiss-Tomkins","rep_candidate":"Dave Bronson","status":"Not called","winner":null,"flip":false,"as_of":"9:20 PM ET","challenger_party":"D","dem_pct":null,"rep_pct":null,"other_pct":null,"pct_in":null},{"abbr":"AZ","state":"Arizona","held_by":"D","dem_candidate":"Katie Hobbs","rep_candidate":"Andy Biggs","status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":59,"rep_pct":40,"other_pct":1,"pct_in":65},{"abbr":"AR","state":"Arkansas","held_by":"R","dem_candidate":"Fred Love","rep_candidate":"Sarah Huckabee Sanders","status":"Projected R","winner":"Sarah Huckabee Sanders","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":40,"rep_pct":53,"other_pct":7,"pct_in":74},{"abbr":"CA","state":"California","held_by":"D","dem_candidate":"Xavier Becerra","rep_candidate":"Steve Hilton","status":"Not called","winner":null,"flip":false,"as_of":"9:20 PM ET","challenger_party":"D","dem_pct":null,"rep_pct":null,"other_pct":null,"pct_in":null},{"abbr":"CO","state":"Colorado","held_by":"D","dem_candidate":"Phil Weiser","rep_candidate":"Victor Marx","status":"Projected D","winner":"Phil Weiser","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":62,"rep_pct":33,"other_pct":3,"pct_in":73},{"abbr":"CT","state":"Connecticut","held_by":"D","dem_candidate":"Ned Lamont","rep_candidate":"Ryan Fazio","status":"Projected D","winner":"Ned Lamont","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":60,"rep_pct":40,"other_pct":null,"pct_in":24},{"abbr":"FL","state":"Florida","held_by":"R","dem_candidate":"David Jolly","rep_candidate":"Byron Donalds","status":"Projected R","winner":"Byron Donalds","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":49,"rep_pct":50,"other_pct":0,"pct_in":99},{"abbr":"GA","state":"Georgia","held_by":"R","dem_candidate":"Keisha Lance Bottoms","rep_candidate":"Rick Jackson","status":"Projected D","winner":"Keisha Lance Bottoms","flip":true,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":54,"rep_pct":46,"other_pct":null,"pct_in":83},{"abbr":"HI","state":"Hawaii","held_by":"D","dem_candidate":"Josh Green","rep_candidate":"Gary Cordery","status":"Not called","winner":null,"flip":false,"as_of":"9:20 PM ET","challenger_party":"D","dem_pct":null,"rep_pct":null,"other_pct":null,"pct_in":null},{"abbr":"ID","state":"Idaho","held_by":"R","dem_candidate":"Terri Pickens","rep_candidate":"Brad Little","status":"Not called","winner":null,"flip":false,"as_of":"9:20 PM ET","challenger_party":"D","dem_pct":null,"rep_pct":null,"other_pct":null,"pct_in":null},{"abbr":"IL","state":"Illinois","held_by":"D","dem_candidate":"JB Pritzker","rep_candidate":"Darren Bailey","status":"Projected D","winner":"JB Pritzker","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":60,"rep_pct":37,"other_pct":3,"pct_in":54},{"abbr":"IA","state":"Iowa","held_by":"R","dem_candidate":"Rob Sand","rep_candidate":"Zach Lahn","status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":59,"rep_pct":41,"other_pct":null,"pct_in":37},{"abbr":"KS","state":"Kansas","held_by":"D","dem_candidate":"Cindy Holscher","rep_candidate":"Ty Masterson","status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":54,"rep_pct":46,"other_pct":null,"pct_in":69},{"abbr":"ME","state":"Maine","held_by":"D","dem_candidate":"Hannah Pingree","rep_candidate":"Robert Charles","status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":50,"rep_pct":41,"other_pct":8,"pct_in":19},{"abbr":"MD","state":"Maryland","held_by":"D","dem_candidate":"Wes Moore","rep_candidate":"Dan Cox","status":"Projected D","winner":"Wes Moore","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":62,"rep_pct":34,"other_pct":2,"pct_in":60},{"abbr":"MA","state":"Massachusetts","held_by":"D","dem_candidate":"Maura Healey","rep_candidate":"Michael Minogue","status":"Projected D","winner":"Maura Healey","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":66,"rep_pct":30,"other_pct":3,"pct_in":20},{"abbr":"MI","state":"Michigan","held_by":"D","dem_candidate":"Jocelyn Benson","rep_candidate":"John James","status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":57,"rep_pct":42,"other_pct":1,"pct_in":22},{"abbr":"MN","state":"Minnesota","held_by":"D","dem_candidate":"Amy Klobuchar","rep_candidate":"Lisa Demuth","status":"Too early","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":42,"rep_pct":56,"other_pct":2,"pct_in":3},{"abbr":"NE","state":"Nebraska","held_by":"R","dem_candidate":"Lynne Walz","rep_candidate":"Jim Pillen","status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":53,"rep_pct":41,"other_pct":4,"pct_in":37},{"abbr":"NV","state":"Nevada","held_by":"R","dem_candidate":"Aaron Ford","rep_candidate":"Joe Lombardo","status":"Counting","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":null,"rep_pct":null,"other_pct":null,"pct_in":0},{"abbr":"NH","state":"New Hampshire","held_by":"R","dem_candidate":"Cinde Warmington","rep_candidate":"Kelly Ayotte","status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":48,"rep_pct":50,"other_pct":2,"pct_in":57},{"abbr":"NM","state":"New Mexico","held_by":"D","dem_candidate":"Deb Haaland","rep_candidate":"Greggory Hull","status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":57,"rep_pct":43,"other_pct":null,"pct_in":29},{"abbr":"NY","state":"New York","held_by":"D","dem_candidate":"Kathy Hochul","rep_candidate":"Bruce Blakeman","status":"Projected D","winner":"Kathy Hochul","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":65,"rep_pct":35,"other_pct":null,"pct_in":59},{"abbr":"OH","state":"Ohio","held_by":"R","dem_candidate":"Amy Acton","rep_candidate":"Vivek Ramaswamy","status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":50,"rep_pct":46,"other_pct":3,"pct_in":75},{"abbr":"OK","state":"Oklahoma","held_by":"R","dem_candidate":"Cyndi Munson","rep_candidate":"Mike Mazzei","status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":44,"rep_pct":53,"other_pct":1,"pct_in":75},{"abbr":"OR","state":"Oregon","held_by":"D","dem_candidate":"Tina Kotek","rep_candidate":"Christine Drazan","status":"Not called","winner":null,"flip":false,"as_of":"9:20 PM ET","challenger_party":"D","dem_pct":null,"rep_pct":null,"other_pct":null,"pct_in":null},{"abbr":"PA","state":"Pennsylvania","held_by":"D","dem_candidate":"Josh Shapiro","rep_candidate":"Stacy Garrity","status":"Projected D","winner":"Josh Shapiro","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":62,"rep_pct":37,"other_pct":1,"pct_in":69},{"abbr":"RI","state":"Rhode Island","held_by":"D","dem_candidate":"Helena Foulkes","rep_candidate":"Aaron Guckian","status":"Projected D","winner":"Helena Foulkes","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":57,"rep_pct":13,"other_pct":28,"pct_in":95},{"abbr":"SC","state":"South Carolina","held_by":"R","dem_candidate":"Jermaine Johnson","rep_candidate":"Alan Wilson","status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":47,"rep_pct":52,"other_pct":1,"pct_in":88},{"abbr":"SD","state":"South Dakota","held_by":"R","dem_candidate":"Dan Ahlers","rep_candidate":"Larry Rhoden","status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":33,"rep_pct":67,"other_pct":null,"pct_in":19},{"abbr":"TN","state":"Tennessee","held_by":"R","dem_candidate":"Jerri Green","rep_candidate":"Marsha Blackburn","status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":43,"rep_pct":45,"other_pct":9,"pct_in":75},{"abbr":"TX","state":"Texas","held_by":"R","dem_candidate":"Gina Hinojosa","rep_candidate":"Greg Abbott","status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":56,"rep_pct":43,"other_pct":1,"pct_in":57},{"abbr":"VT","state":"Vermont","held_by":"R","dem_candidate":"Amanda Janoo","rep_candidate":"Phil Scott","status":"R leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":46,"rep_pct":52,"other_pct":1,"pct_in":83},{"abbr":"WI","state":"Wisconsin","held_by":"D","dem_candidate":"David Crowley","rep_candidate":"Tom Tiffany","status":"D leads","winner":null,"flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":56,"rep_pct":44,"other_pct":null,"pct_in":57},{"abbr":"WY","state":"Wyoming","held_by":"R","dem_candidate":"Kenneth Casner","rep_candidate":"Eric Barlow","status":"Projected R","winner":"Eric Barlow","flip":false,"as_of":"10:18 PM ET","challenger_party":"D","dem_pct":19,"rep_pct":65,"other_pct":15,"pct_in":9}],"house_flips":[{"district":"NC-11","winner":"Jamie Ager","party":"D","flipped_from":"R","note":"Open seat (Chuck Edwards, R)","called_at":"9:06 PM ET"},{"district":"NJ-7","winner":"Rebecca Bennett","party":"D","flipped_from":"R","note":"Defeats Rep. Tom Kean Jr.","called_at":"10:18 PM ET"},{"district":"KY-6","winner":"Z. Dembo","party":"D","flipped_from":"R","note":"Open seat (Andy Barr, R)","called_at":"10:18 PM ET"}],"calls":[{"t":"7:01 PM","p":"D","what":"Mark Warner (D) wins Virginia Senate","sub":"Democratic hold","flip":false,"big":false},{"t":"7:39 PM","p":"D","what":"Jon Ossoff (D) wins Georgia Senate","sub":"Democratic hold; Mike Collins concedes","flip":false,"big":false},{"t":"7:39 PM","p":"R","what":"Shelley Moore Capito (R) wins West Virginia Senate","sub":"Republican hold","flip":false,"big":false},{"t":"8:38 PM","p":"D","what":"Chris Pappas (D) wins New Hampshire Senate","sub":"Democratic hold, open seat","flip":false,"big":false},{"t":"8:38 PM","p":"D","what":"Juliana Stratton (D) wins Illinois Senate","sub":"Democratic hold, open seat","flip":false,"big":false},{"t":"8:42 PM","p":"R","what":"Ashley Moody (R) wins Florida Senate special","sub":"Republican hold","flip":false,"big":false},{"t":"8:42 PM","p":"R","what":"Andy Barr (R) wins Kentucky Senate","sub":"Republican hold, open seat","flip":false,"big":false},{"t":"8:47 PM","p":"D","big":true,"flip":true,"what":"Roy Cooper (D) wins North Carolina Senate","sub":"Flips a Republican seat"},{"t":"8:55 PM","p":"D","what":"JB Pritzker (D) wins third term as Illinois governor","sub":"Democratic hold","flip":false,"big":false},{"t":"9:06 PM","p":"D","flip":true,"what":"Jamie Ager (D) wins North Carolina's 11th District","sub":"First Republican-held House seat to flip","big":false},{"t":"9:09 PM","p":"D","big":true,"what":"Decision Desk HQ projects Democrats will win the House","sub":"Other networks had not yet projected control","flip":false},{"t":"by 9:20 PM","p":"D","what":"Cory Booker (D) wins New Jersey Senate","sub":"Democratic hold","flip":false,"big":false},{"t":"by 9:20 PM","p":"D","flip":true,"what":"Keisha Lance Bottoms (D) wins Georgia governor","sub":"Flips a Republican governorship","big":false},{"t":"by 9:20 PM","p":"D","what":"Kathy Hochul, Josh Shapiro and Ned Lamont (D) win governorships","sub":"New York, Pennsylvania and Connecticut, all Democratic holds","flip":false,"big":false},{"t":"by 9:20 PM","p":"R","what":"Byron Donalds (R) wins Florida governor","sub":"Republican hold","flip":false,"big":false},{"t":"10:18 PM","p":"R","what":"Harriet Hageman (R) wins Wyoming Senate","sub":"Republican hold, open seat","flip":false,"big":false},{"t":"10:18 PM","p":"D","what":"Democrats flip Kentucky's 6th District","sub":"Open seat left by Andy Barr (R)","flip":true,"big":false},{"t":"10:18 PM","p":"D","what":"Rebecca Bennett (D) wins New Jersey's 7th District","sub":"Defeats Rep. Tom Kean Jr.","flip":true,"big":false},{"t":"10:18 PM","p":"R","what":"Tom Cotton (R) and Kevin Hern (R) win Arkansas and Oklahoma Senate","sub":"Republican holds","flip":false,"big":false},{"t":"10:18 PM","p":"D","what":"Hickenlooper, Coons, Markey, Luján and Reed (D) win Senate races","sub":"Colorado, Delaware, Massachusetts, New Mexico, Rhode Island: Democratic holds","flip":false,"big":false}],"log":[{"at":"10:18 PM ET, Nov 3","by":"Claude (manual refresh)","changes":73,"rejected":0,"source":"ABC News live results (AP data)"}],"states":[{"abbr":"AK","name":"Alaska","col":0,"row":0},{"abbr":"ME","name":"Maine","col":10,"row":0},{"abbr":"VT","name":"Vermont","col":9,"row":1},{"abbr":"NH","name":"New Hampshire","col":10,"row":1},{"abbr":"WA","name":"Washington","col":0,"row":2},{"abbr":"ID","name":"Idaho","col":1,"row":2},{"abbr":"MT","name":"Montana","col":2,"row":2},{"abbr":"ND","name":"North Dakota","col":3,"row":2},{"abbr":"MN","name":"Minnesota","col":4,"row":2},{"abbr":"IL","name":"Illinois","col":5,"row":2},{"abbr":"WI","name":"Wisconsin","col":6,"row":2},{"abbr":"MI","name":"Michigan","col":7,"row":2},{"abbr":"NY","name":"New York","col":8,"row":2},{"abbr":"RI","name":"Rhode Island","col":9,"row":2},{"abbr":"MA","name":"Massachusetts","col":10,"row":2},{"abbr":"OR","name":"Oregon","col":0,"row":3},{"abbr":"NV","name":"Nevada","col":1,"row":3},{"abbr":"WY","name":"Wyoming","col":2,"row":3},{"abbr":"SD","name":"South Dakota","col":3,"row":3},{"abbr":"IA","name":"Iowa","col":4,"row":3},{"abbr":"IN","name":"Indiana","col":5,"row":3},{"abbr":"OH","name":"Ohio","col":6,"row":3},{"abbr":"PA","name":"Pennsylvania","col":7,"row":3},{"abbr":"NJ","name":"New Jersey","col":8,"row":3},{"abbr":"CT","name":"Connecticut","col":9,"row":3},{"abbr":"CA","name":"California","col":0,"row":4},{"abbr":"UT","name":"Utah","col":1,"row":4},{"abbr":"CO","name":"Colorado","col":2,"row":4},{"abbr":"NE","name":"Nebraska","col":3,"row":4},{"abbr":"MO","name":"Missouri","col":4,"row":4},{"abbr":"KY","name":"Kentucky","col":5,"row":4},{"abbr":"WV","name":"West Virginia","col":6,"row":4},{"abbr":"VA","name":"Virginia","col":7,"row":4},{"abbr":"MD","name":"Maryland","col":8,"row":4},{"abbr":"DE","name":"Delaware","col":9,"row":4},{"abbr":"AZ","name":"Arizona","col":1,"row":5},{"abbr":"NM","name":"New Mexico","col":2,"row":5},{"abbr":"KS","name":"Kansas","col":3,"row":5},{"abbr":"AR","name":"Arkansas","col":4,"row":5},{"abbr":"TN","name":"Tennessee","col":5,"row":5},{"abbr":"NC","name":"North Carolina","col":6,"row":5},{"abbr":"SC","name":"South Carolina","col":7,"row":5},{"abbr":"DC","name":"District of Columbia","col":8,"row":5},{"abbr":"OK","name":"Oklahoma","col":3,"row":6},{"abbr":"LA","name":"Louisiana","col":4,"row":6},{"abbr":"MS","name":"Mississippi","col":5,"row":6},{"abbr":"AL","name":"Alabama","col":6,"row":6},{"abbr":"GA","name":"Georgia","col":7,"row":6},{"abbr":"HI","name":"Hawaii","col":0,"row":7},{"abbr":"TX","name":"Texas","col":3,"row":7},{"abbr":"FL","name":"Florida","col":8,"row":7}]}</script>
+<script>
+const DATA = JSON.parse(document.getElementById("election-data").textContent);
+const CALLS = DATA.calls;
+const WATCH = ["TX", "OH", "SC", "ME", "MI", "IA", "AK", "KS"];
+
+const fmt = (n) => n.toLocaleString("en-US");
+const pct = (v) => v == null ? "" : (Number.isInteger(v) ? v : v.toFixed(1)) + "%";
+const el = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v); } for (const k of kids) if (k != null) e.append(k); return e; };
+const isProj = (s) => /^Projected /.test(s);
+const chal = (r) => r.challenger_party === "I" ? { p: "I", pct: r.other_pct, color: "var(--ind)", soft: "var(--ind-soft)" } : { p: "D", pct: r.dem_pct, color: "var(--dem)", soft: "var(--dem-soft)" };
+const fillFor = (s) => ({ "Projected D": "var(--dem)", "Projected R": "var(--rep)", "Projected I": "var(--ind)", "D leads": "var(--dem-soft)", "R leads": "var(--rep-soft)", "I leads": "var(--ind-soft)" })[s] || null;
+const chipCls = (s) => ({ "Projected D": "pd", "Projected R": "pr", "Projected I": "pi", "D leads": "ld", "R leads": "lr", "I leads": "li" })[s] || "";
+const rank = (s) => ({ "Projected D": 0, "Projected R": 0, "Projected I": 0, "D leads": 1, "R leads": 1, "I leads": 1, "Counting": 2, "Too early": 2 })[s] ?? 3;
+const chip = (r) => { const f = document.createDocumentFragment(); f.append(el("span", { class: "chip " + chipCls(r.status) }, r.status)); if (r.flip) f.append(el("span", { class: "chip fl" }, "Flip")); return f; };
+
+/* Balance of power */
+(() => {
+  const sen = DATA.tally.find((r) => r.chamber === "Senate"), house = DATA.tally.find((r) => r.chamber === "House");
+  document.getElementById("tally-time").textContent = `Seats decided as of ${sen.as_of}. Source: ${sen.source || "AP"}.`;
+  const gov = DATA.governor;
+  const g = { dem: gov.filter((r) => r.status === "Projected D").length, rep: gov.filter((r) => r.status === "Projected R").length, total: gov.length };
+  const senGain = DATA.senate.filter((r) => r.status === "Projected D" && r.held_by === "R").length;
+  const govGain = gov.filter((r) => r.status === "Projected D" && r.held_by === "R").length;
+  const card = (label, dem, rep, total, maj, note, extra) => {
+    const und = total - dem - rep;
+    const bar = el("div", { class: "tbar", role: "img", "aria-label": `${label}: ${dem} Democrats, ${rep} Republicans, ${und} not called` },
+      el("div", { class: "track" }, el("i", { style: `width:${dem / total * 100}%;background:var(--dem)` }), el("i", { style: "flex:1" }), el("i", { style: `width:${rep / total * 100}%;background:var(--rep)` })));
+    if (maj) bar.append(el("div", { class: "mk", style: `left:${maj / total * 100}%` }, el("span", {}, `${maj} for control`)));
+    return el("article", { class: "card" },
+      el("div", { class: "tally-top" }, el("span", { class: "lab" }, label), el("span", { class: "note" }, `${fmt(total)} ${label === "Governors" ? "races" : "seats"}`)),
+      el("div", { class: "big" },
+        el("div", { class: "n dn" }, String(dem), el("small", {}, "Democrats")),
+        el("div", { class: "un" }, el("b", {}, fmt(und)), "not called"),
+        el("div", { class: "n rn" }, String(rep), el("small", {}, "Republicans"))),
+      bar, extra, el("p", { class: "note" }, note));
+  };
+  const box = document.getElementById("tallies");
+  box.append(
+    card("Senate", sen.dem, sen.rep, sen.total, sen.majority, `Before the election: ${sen.dem_before} D, ${sen.rep_before} R. Includes the 65 seats not on the ballot. Democratic pickups so far: ${senGain}.`),
+    card("House", house.dem, house.rep, house.total, house.majority, `Before the election: ${house.dem_before} D, ${house.rep_before} R, 1 independent, 2 vacant. Democratic pickups so far: ${DATA.house_flips.filter((f) => f.party === "D").length}.`,
+      el("div", { class: "callout" }, el("span", {}, el("b", {}, "Projected Democratic. "), "Decision Desk HQ called House control at 9:09 PM ET, before most seats were individually called."))),
+    card("Governors", g.dem, g.rep, g.total, null, `Races on this year's ballot. Democratic pickups so far: ${govGain}. Republican pickups: ${gov.filter((r) => r.status === "Projected R" && r.held_by === "D").length}.`)
+  );
+})();
+
+/* Map */
+const mapState = { kind: "senate" };
+function drawMap() {
+  const box = document.getElementById("mapbox");
+  box.replaceChildren();
+  const races = new Map(DATA[mapState.kind].map((r) => [r.abbr, r]));
+  const cols = 11, rows = 8, c = 60, gp = 6;
+  const W = cols * c + (cols - 1) * gp, H = rows * c + (rows - 1) * gp;
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", `-3 -3 ${W + 6} ${H + 6}`);
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", `${mapState.kind === "senate" ? "Senate" : "Governor"} results by state`);
+  const tip = el("div", { class: "tip", hidden: "" });
+  let active = null;
+  const show = (s, r, evt) => {
+    tip.replaceChildren(el("div", { class: "t" }, s.name));
+    if (!r) tip.append(el("div", { class: "m" }, `No ${mapState.kind === "senate" ? "Senate" : "governor"} race this year`));
+    else {
+      tip.append(
+        el("div", { class: "c" }, el("i", { style: `background:${chal(r).color}` }), `${r.dem_candidate}${r.challenger_party === "I" ? "" : " (D)"}`, el("b", {}, pct(chal(r).pct))),
+        el("div", { class: "c" }, el("i", { style: "background:var(--rep)" }), `${r.rep_candidate} (R)`, el("b", {}, pct(r.rep_pct))),
+        el("div", { class: "m" }, `${r.status}${r.flip ? " · flip" : ""}${r.pct_in ? ` · ${r.pct_in}% counted` : ""}`),
+        el("div", { class: "m" }, `Seat held by ${r.held_by === "D" ? "Democrats" : "Republicans"} · ${r.as_of}`));
+    }
+    tip.hidden = false;
+    const b = box.getBoundingClientRect(), x = evt.clientX - b.left, y = evt.clientY - b.top;
+    const tw = tip.offsetWidth, th = tip.offsetHeight;
+    let left = x + 14; if (left + tw > b.width) left = Math.max(0, x - tw - 14);
+    let top = y - th - 12; if (top < 0) top = Math.min(y + 16, b.height - th);
+    tip.style.left = left + "px"; tip.style.top = Math.max(0, top) + "px";
+  };
+  for (const s of DATA.states) {
+    const r = races.get(s.abbr);
+    const g = document.createElementNS(NS, "g");
+    g.setAttribute("class", "st");
+    g.setAttribute("transform", `translate(${s.col * (c + gp)},${s.row * (c + gp)})`);
+    const rect = document.createElementNS(NS, "rect");
+    rect.setAttribute("width", c); rect.setAttribute("height", c); rect.setAttribute("rx", 6);
+    const f = r ? fillFor(r.status) : null;
+    rect.setAttribute("fill", "transparent");
+    rect.style.fill = !r ? "var(--none)" : f || "var(--surface)";
+    if (r && r.flip) { rect.style.stroke = "var(--ink)"; rect.style.strokeWidth = "4"; }
+    else if (r && !f) { rect.style.stroke = "var(--wait-line)"; rect.style.strokeWidth = "1.5"; rect.style.strokeDasharray = "5 4"; }
+    const t = document.createElementNS(NS, "text");
+    t.setAttribute("x", c / 2); t.setAttribute("y", c / 2); t.setAttribute("dy", "0.35em"); t.setAttribute("text-anchor", "middle");
+    t.setAttribute("font-size", "17"); t.setAttribute("font-weight", "700"); t.setAttribute("font-family", "Public Sans, system-ui, sans-serif");
+    t.setAttribute("fill", "currentColor");
+    t.style.fill = !r ? "var(--muted)" : isProj(r.status) ? "#ffffff" : "var(--ink)";
+    t.style.pointerEvents = "none";
+    t.textContent = s.abbr;
+    g.append(rect, t);
+    if (r) { g.setAttribute("tabindex", "0"); g.setAttribute("aria-label", `${s.name}: ${r.status}`); }
+    g.style.cursor = r ? "pointer" : "default";
+    g.addEventListener("pointermove", (e) => show(s, r, e));
+    g.addEventListener("pointerdown", (e) => { if (active) active.classList.remove("on"); active = g; g.classList.add("on"); show(s, r, e); });
+    g.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") { tip.hidden = true; g.classList.remove("on"); } });
+    g.addEventListener("focus", () => { const b = g.getBoundingClientRect(); show(s, r, { clientX: b.left + b.width / 2, clientY: b.top }); });
+    g.addEventListener("blur", () => { tip.hidden = true; });
+    svg.append(g);
+  }
+  box.append(svg, tip);
+}
+document.querySelectorAll("#map .tabs button").forEach((b) => b.addEventListener("click", () => {
+  document.querySelectorAll("#map .tabs button").forEach((x) => x.setAttribute("aria-selected", String(x === b)));
+  mapState.kind = b.dataset.kind; drawMap();
+}));
+drawMap();
+
+/* Races to watch + count chart */
+const miniBar = (r) => {
+  const c = chal(r);
+  if (c.pct == null || r.rep_pct == null || r.pct_in < 5) return el("div", { class: "mini empty" }, r.pct_in ? `${r.pct_in}% counted, too early to show shares` : "Waiting for votes");
+  return el("div", { class: "mini" + (isProj(r.status) ? "" : " soft"), role: "img", "aria-label": `${r.dem_candidate} ${pct(c.pct)}, ${r.rep_candidate} ${pct(r.rep_pct)}` },
+    el("i", { class: "d", style: `width:${c.pct}%;background:${isProj(r.status) ? c.color : c.soft}` }, pct(c.pct)),
+    el("i", { class: "r", style: `width:${r.rep_pct}%` }, pct(r.rep_pct)),
+    el("span", { class: "half" }));
+};
+(() => {
+  const by = new Map(DATA.senate.map((r) => [r.abbr, r]));
+  document.getElementById("watch").append(...WATCH.map((a) => by.get(a)).filter(Boolean).map((r) =>
+    el("div", { class: "wrow" },
+      el("div", { class: "h" }, el("span", {}, el("b", {}, r.state), ` · ${r.dem_candidate.replace(/ \(I\)$/, "").split(" ").pop()} (${chal(r).p}) v ${r.rep_candidate.split(" ").pop()} (R)`), el("span", {}, r.status)),
+      miniBar(r))));
+  const rows = DATA.senate.filter((r) => chal(r).pct != null && r.rep_pct != null && r.pct_in >= 5).sort((a, b) => (chal(b).pct - b.rep_pct) - (chal(a).pct - a.rep_pct));
+  document.getElementById("countchart").append(...rows.map((r) =>
+    el("div", { class: "crow" },
+      el("div", { class: "nm" }, el("b", {}, r.state), el("small", {}, `${r.pct_in}% counted · ${r.as_of}`)),
+      miniBar(r),
+      el("div", { class: "st" }, chip(r)))));
+})();
+
+/* Call log */
+document.getElementById("log").append(...CALLS.map((c) =>
+  el("li", { class: c.big ? "big-call" : "" },
+    el("time", {}, c.t),
+    el("span", { class: "dot", style: `background:var(--${c.p === "D" ? "dem" : c.p === "I" ? "ind" : "rep"})` }),
+    el("div", { class: "what" }, c.what, c.flip ? el("span", { class: "chip fl" }, "Flip") : null, el("small", {}, c.sub)))));
+
+/* Tables */
+const tbl = { kind: "senate" };
+function drawTable() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const thead = document.querySelector("#tbl thead"), tbody = document.querySelector("#tbl tbody");
+  const cols = tbl.kind === "house"
+    ? [["District"], ["Winner"], ["Flipped from"], ["Note", "opt"], ["Called"]]
+    : tbl.kind === "senate"
+      ? [["State"], ["Democrat / Ind."], ["Republican"], ["D/I %", "n"], ["R %", "n"], ["Counted", "n opt"], ["Status"]]
+      : [["State"], ["Democrat"], ["Republican"], ["D %", "n opt"], ["R %", "n opt"], ["Held by", "opt"], ["Status"]];
+  thead.replaceChildren(el("tr", {}, ...cols.map(([h, c]) => el("th", c ? { class: c } : {}, h))));
+  let rows = tbl.kind === "house" ? DATA.house_flips : [...DATA[tbl.kind]].sort((a, b) => rank(a.status) - rank(b.status) || a.state.localeCompare(b.state));
+  if (q) rows = rows.filter((r) => Object.values(r).some((v) => String(v ?? "").toLowerCase().includes(q)));
+  const td = (t, c) => el("td", c ? { class: c } : {}, t ?? "");
+  tbody.replaceChildren(...rows.map((r) => {
+    if (tbl.kind === "house") return el("tr", {}, td(r.district), td(r.winner + ` (${r.party})`, r.party === "D" ? "dc win" : "rc win"), td(r.flipped_from === "R" ? "Republican" : "Democrat"), td(r.note, "opt"), td(r.called_at));
+    const dw = r.status === "Projected D" || r.status === "Projected I", rw = r.status === "Projected R";
+    const base = [td(r.state), td(r.dem_candidate, "dc" + (dw ? " win" : "")), td(r.rep_candidate, "rc" + (rw ? " win" : ""))];
+    const st = el("td", {}, chip(r));
+    if (tbl.kind === "senate") return el("tr", {}, ...base, td(pct(chal(r).pct), "n"), td(pct(r.rep_pct), "n"), td(r.pct_in ? r.pct_in + "%" : "", "n opt"), st);
+    return el("tr", {}, ...base, td(pct(r.dem_pct), "n opt"), td(pct(r.rep_pct), "n opt"), td(r.held_by === "D" ? "Democrat" : "Republican", "opt " + (r.held_by === "D" ? "dc" : "rc")), st);
+  }));
+  if (!rows.length) tbody.append(el("tr", {}, el("td", { colspan: String(cols.length) }, "No races match that search. Try a state name or a candidate's last name.")));
+}
+document.querySelectorAll("#races .tabs button").forEach((b) => b.addEventListener("click", () => {
+  document.querySelectorAll("#races .tabs button").forEach((x) => x.setAttribute("aria-selected", String(x === b)));
+  tbl.kind = b.dataset.kind; drawTable();
+}));
+document.getElementById("q").addEventListener("input", drawTable);
+drawTable();
+document.getElementById("status").textContent = `Results coming in · updated ${DATA.meta.updated_label.split(",")[0]}`;
+document.getElementById("h-lead").textContent = DATA.meta.headline_lead;
+document.getElementById("h-rest").textContent = DATA.meta.headline_rest;
+document.getElementById("dek").textContent = DATA.meta.dek;
+document.getElementById("ulog").append(...(DATA.log || []).map((u) =>
+  el("li", {}, el("time", {}, u.at.split(",")[0].replace(" ET", "")), el("span", { class: "dot", style: "background:var(--wait-line)" }),
+    el("div", { class: "what" }, `${u.by}: ${u.changes} change${u.changes === 1 ? "" : "s"}${u.rejected ? `, ${u.rejected} skipped by checks` : ""}`, el("small", {}, u.source || "")))));
+</script>
+
+</body>
+</html>
